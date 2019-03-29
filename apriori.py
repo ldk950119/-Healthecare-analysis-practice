@@ -33,7 +33,7 @@ def find_rule(d, support, confidence, ms=u'--'):
         sf = lambda i: d[i].prod(axis=1, numeric_only=True)  # 新一批支持度的计算函数
 
         # 创建连接数据，这一步耗时、耗内存最严重。当数据集较大时，可以考虑并行运算优化。
-        d_2 = pd.DataFrame(map(sf, column), index=[
+        d_2 = pd.DataFrame(list(map(sf, column)), index=[
                            ms.join(i) for i in column]).T
 
         support_series_2 = 1.0 * \
